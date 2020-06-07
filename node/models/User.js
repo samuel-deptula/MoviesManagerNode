@@ -5,7 +5,8 @@ const userSchema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
     login: { type: String, required: true },
     password: { type: String, required: true },
-    movies: [String],
+    movies: [Object],
+    series: [Object],
     isAdmin: Boolean
 });
 

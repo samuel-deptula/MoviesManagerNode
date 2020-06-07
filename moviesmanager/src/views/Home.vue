@@ -1,82 +1,69 @@
 <template>
-  <div class="home">
-    <b-input-group prepend="Recherche" class="mt-3 col-md-4 offset-4">
-      <b-form-input @keyup.enter="searchMovies" v-model="query"/>
-      <b-input-group-append>
-        <b-button @click="searchMovies" variant="info">Ok</b-button>
-      </b-input-group-append>
-    </b-input-group>
-    <b-list-group horizontal="" id="moviesList" class="listGroup">
-      <b-list-group-item class="movieItem" v-for="movie in movies" :key="movie.id">
-        <movie-item class :movie="movie"/>
-      </b-list-group-item>
-    </b-list-group>
-    <p v-for="fav in favs" :key="fav.id">{{fav.id}}</p>
-    <b-pagination
-            v-show="movies.length > 0"
-      align="center"
-      v-model="currentPage"
-      :total-rows="rows"
-      :per-page="perPage"
-      aria-controls="moviesList"
-    />
-  </div>
+    <div class="home">
+        <h1 v-if="movies.length > 0">Films populaires de la semaine</h1>
+        <b-list-group horizontal="" id="moviesList" class="listGroup">
+            <b-list-group-item class="movieItem" v-for="movie in movies" :key="movie.id">
+                <movie-item :isMovie="true" :movie="movie"/>
+            </b-list-group-item>
+        </b-list-group>
+        <h1 v-if="series.length > 0">Séries populaires de la semaine</h1>
+        <b-list-group horizontal="" id="seriesList" class="listGroup">
+            <b-list-group-item class="movieItem" v-for="serie in series" :key="serie.id">
+                <movie-item :isMovie="false" :movie="serie"/>
+            </b-list-group-item>
+        </b-list-group>
+    </div>
 </template>
 
 <script>
-import MovieItem from "../components/MovieItem";
+    import MovieItem from "../components/MovieItem";
 
-export default {
-  name: "home",
-  components: {
-    MovieItem
-  },
-  data() {
-    return {
-      movies: [],
-      favs: [],
-      info: [],
-      query: "",
-      perPage: 20,
-      currentPage: 1,
-      rows: 0
+    export default {
+        name: "home",
+        components: {
+            MovieItem
+        },
+        data() {
+            return {
+                movies: [],
+                series: [],
+            };
+        },
+        created() {
+            this.searchMovies();
+            this.searchSeries();
+        },
+        computed: {
+            token() {
+                return this.$store.state.user.jwtToken;
+            }
+        },
+        methods: {
+            searchMovies: async function() {
+                let response = await this.$axios.get(
+                    "/trending/movie/week"
+                );
+
+                this.movies = response.data.results;
+            },
+            searchSeries: async function() {
+                let response = await this.$axios.get(
+                    "/trending/tv/week"
+                );
+
+                this.series = response.data.results;
+            }
+        }
     };
-  },
-  mounted() {
-    this.searchFav();
-  },
-  computed: {
-    token() {
-      return this.$store.state.user.jwtToken;
-    }
-  },
-  watch: {
-    currentPage: function() {
-      this.searchMovies();
-    }
-  },
-  methods: {
-    searchMovies: async function() {
-      let response = await this.$axios.get(
-        "/search/movie?query=" + this.query + "&page=" + this.currentPage
-      );
-
-      this.movies = response.data.results;
-
-      this.rows = response.data.total_results;
-    }
-  }
-};
 </script>
 
 <style lang="css">
-.listGroup {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 10px;
-  justify-content: center;
-}
-.movieItem {
-  width: 20%;
-}
+    .listGroup {
+        display: flex;
+        margin-top: 10px;
+        justify-content: center;
+    }
+    .movieItem {
+        width: 20%;
+    }
 </style>

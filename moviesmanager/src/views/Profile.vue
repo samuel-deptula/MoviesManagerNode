@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <h1>Hello {{user.login}}</h1>
+    <h1>Bonjour {{user.login}}</h1>
   </div>
 </template>
 

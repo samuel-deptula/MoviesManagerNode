@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import About from "../views/About";
+import AboutMovie from "../views/AboutMovie";
+import AboutSerie from "../views/AboutSerie";
 import Profile from "../views/Profile";
 import Signup from "../views/Signup";
 import Signin from "../views/Signin";
 import Admin from "../views/Admin";
+import Movie from "../views/Movie";
+import Serie from "../views/Serie";
 
 Vue.use(VueRouter)
 
@@ -16,9 +19,24 @@ const routes = [
     component: Home
   },
   {
-    path: '/about/:id',
-    name: 'about',
-    component: About
+    path: '/movie',
+    name: 'movie',
+    component: Movie
+  },
+  {
+    path: '/serie',
+    name: 'serie',
+    component: Serie
+  },
+  {
+    path: '/movie/about/:id',
+    name: 'aboutMovie',
+    component: AboutMovie
+  },
+  {
+    path: '/serie/about/:id',
+    name: 'aboutSerie',
+    component: AboutSerie
   },
   {
     path: '/signup',
