@@ -12,7 +12,6 @@
         <movie-item :isMovie="true" :movie="movie"/>
       </b-list-group-item>
     </b-list-group>
-    <p v-for="fav in favs" :key="fav.id">{{fav.id}}</p>
     <b-pagination
       v-show="movies.length > 0"
       align="center"
@@ -35,7 +34,6 @@ export default {
   data() {
     return {
       movies: [],
-      favs: [],
       info: [],
       query: "",
       perPage: 20,

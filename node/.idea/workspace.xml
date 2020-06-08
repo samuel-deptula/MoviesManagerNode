@@ -2,21 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74eb4a42-b8e7-46b7-8de9-2ddc0ebf3122" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/controllers/movie.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/movie.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moviesmanager/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../moviesmanager/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moviesmanager/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../moviesmanager/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moviesmanager/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../moviesmanager/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moviesmanager/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../moviesmanager/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moviesmanager/src/components/MovieItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../moviesmanager/src/components/MovieItem.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moviesmanager/src/components/TheHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../moviesmanager/src/components/TheHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moviesmanager/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../moviesmanager/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moviesmanager/src/views/About.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../moviesmanager/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../moviesmanager/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../moviesmanager/src/views/AboutMovie.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../moviesmanager/src/views/AboutMovie.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../moviesmanager/src/views/Movie.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../moviesmanager/src/views/Movie.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../moviesmanager/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../moviesmanager/src/views/Profile.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/movie.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/movie.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/movie.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/movie.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +64,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1591097505198</updated>
-      <workItem from="1591097510191" duration="37369000" />
+      <workItem from="1591097510191" duration="42499000" />
     </task>
     <servers />
   </component>

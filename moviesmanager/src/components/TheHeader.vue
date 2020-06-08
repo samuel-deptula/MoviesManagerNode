@@ -6,6 +6,9 @@
         <div class="flex-fill"></div>
         <div class="d-flex flex-row">
             <div v-if="isLoggedIn === true">
+                <b-nav-item-dropdown text="Lang">
+                    <b-dropdown-item href="#"><router-link style="color: black;" class="mr-3" to="/profile">Profile</router-link></b-dropdown-item>
+                </b-nav-item-dropdown>
                 <router-link class="mr-3" to="/profile">Profile</router-link>
                 <router-link class="mr-3" v-if="isAdmin" to="/admin">Admin</router-link>
                 <b-button @click="logout">deconnexion</b-button>

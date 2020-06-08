@@ -14,6 +14,7 @@ exports.initializeMovie = (req, res, next) => {
                             count ++;
                         }
                 });
+                    console.log(count);
                 if (count == 0) {
                     user.movies.push({
                         id: movieId,
@@ -29,8 +30,8 @@ exports.initializeMovie = (req, res, next) => {
                     fav: false,
                     rate: 0
                 });
-                user.save();
             }
+            user.save();
             let movie = user.movies.find(movie => movie.id == movieId);
             res.status(200).json({
                 movie: movie
@@ -48,10 +49,21 @@ exports.switchFav = (req, res, next) => {
       User.findOne({ _id: req.body.userId })
           .then(user => {
              let movie = user.movies.find(movie => movie.id == req.body.movieId);
+             console.log(movie);
               res.status(200).json({
                   movie: movie
               })
           .catch(error => res.status(500).json({ error }));
           })
+};
+exports.listFav = (req, res, next) => {
+    let id = req.params.id;
+    User.findOne({_id: id})
+        .then(user => {
+            res.status(200).json({
+                favs: user.movies.filter(movie => movie.fav == true)
+            })
+        })
+        .catch(error => res.status(400).json({error}));
 };
 

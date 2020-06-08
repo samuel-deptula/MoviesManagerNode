@@ -19,6 +19,7 @@
               </b-card-text>
               <b-card-text> Synopsis: {{movie.overview}}</b-card-text>
               <b-button @click="switchFav">Favori</b-button>
+              <b-card-text v-if="this.movieInfo.fav">{{this.movieInfo.fav}}</b-card-text>
             </b-card-body>
           </b-col>
         </b-row>
