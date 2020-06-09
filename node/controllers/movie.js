@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 
 exports.initializeMovie = (req, res, next) => {
     let userId = req.body.userId;
-    console.log(userId);
     let movieId = req.body.movieId;
     let count = 0;
     if(userId!==undefined) {

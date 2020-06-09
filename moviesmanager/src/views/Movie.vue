@@ -1,11 +1,8 @@
 <template>
   <div class="home">
-    <h1>Films</h1>
-    <b-input-group prepend="Recherche" class="mt-3 col-md-3 offset-8">
-      <b-form-input @keyup.enter="searchMovies" v-model="query"/>
-      <b-input-group-append>
-        <b-button @click="searchMovies" variant="info">Ok</b-button>
-      </b-input-group-append>
+    <h1 class="p-4">Rechercher Film</h1>
+    <b-input-group prepend="Recherche" class="mb-4 col-md-4 mx-auto">
+      <b-form-input @keyup="searchMovies" v-model="query"/>
     </b-input-group>
     <b-list-group horizontal="" id="moviesList" class="listGroup">
       <b-list-group-item class="movieItem" v-for="movie in movies" :key="movie.id">
@@ -19,6 +16,7 @@
       :total-rows="rows"
       :per-page="perPage"
       aria-controls="moviesList"
+      @change="scrollTop"
     />
   </div>
 </template>
@@ -54,6 +52,9 @@ export default {
     }
   },
   methods: {
+    scrollTop() {
+        window.scrollTo(0,0);
+    },
     searchMovies: async function() {
       if(this.query) {
         let response = await this.$axios.get(
@@ -78,5 +79,10 @@ export default {
 }
 .movieItem {
   width: 20%;
+}
+@media screen and (max-width: 480px) {
+  .movieItem {
+    width: 100% !important;
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="container d-flex flex-column p-3 justify-content-center align-items-center">
-        <h1>Inscription</h1>
-        <b-form @submit.prevent="trySubmit" class="text-left">
+        <h1 class="p-4">Inscription</h1>
+        <b-form @submit.prevent="trySubmit" class="text-left d-flex flex-column col-lg-4">
             <b-form-group
                     id="input-group-1"
                     label="Email:"
@@ -44,7 +44,7 @@
             <b-list-group v-if="formErrors.length">
                 <b-list-group-item class="mb-3" v-for="error in formErrors" :key="error" variant="danger">{{error}}</b-list-group-item>
             </b-list-group>
-            <b-button @click="trySubmit" type="submit" :class="{'disabled': isLoading}" variant="primary">Inscription</b-button>
+            <b-button class="col-lg-4 mx-auto mt-2" type="submit" :class="{'disabled': isLoading}" variant="primary">Inscription</b-button>
         </b-form>
     </div>
 </template>

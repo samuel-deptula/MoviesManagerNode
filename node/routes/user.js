@@ -8,5 +8,6 @@ router.post('/login', userCtrl.login);
 router.get('/users', auth, userCtrl.list);
 router.get('/user/:id', auth, userCtrl.find);
 router.post('/user/ban', auth, userCtrl.ban);
+router.put('/user', auth, userCtrl.updateUser);
 
 module.exports = router;

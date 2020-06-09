@@ -7,6 +7,7 @@ const app = express();
 
 const userRoutes = require('./routes/user');
 const movieRoutes = require('./routes/movie');
+const postRoutes = require('./routes/post');
 
 const mongoose = require('mongoose');
 
@@ -17,8 +18,7 @@ mongoose.connect('mongodb://localhost/movies_manager')
 app.use(cors());
 app.use(bodyParser.json());
 
-console.log("app.js");
-app.use('/api', userRoutes, movieRoutes);
+app.use('/api', userRoutes, movieRoutes, postRoutes);
 
 
 

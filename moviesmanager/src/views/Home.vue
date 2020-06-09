@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <h1 v-if="movies.length > 0">Films populaires de la semaine</h1>
+        <h1 v-if="movies.length > 0" class="p-4">Films populaires de la semaine</h1>
         <b-list-group horizontal="" id="moviesList" class="listGroup">
             <b-list-group-item class="movieItem" v-for="movie in movies" :key="movie.id">
                 <movie-item :isMovie="true" :movie="movie"/>
@@ -31,7 +31,7 @@
         },
         created() {
             this.searchMovies();
-            this.searchSeries();
+
         },
         computed: {
             token() {
@@ -46,13 +46,6 @@
 
                 this.movies = response.data.results;
             },
-            searchSeries: async function() {
-                let response = await this.$axios.get(
-                    "/trending/tv/week"
-                );
-
-                this.series = response.data.results;
-            }
         }
     };
 </script>
@@ -65,5 +58,10 @@
     }
     .movieItem {
         width: 20%;
+    }
+    @media screen and (max-width: 480px){
+        .movieItem{
+        width: 100% !important;
+        }
     }
 </style>

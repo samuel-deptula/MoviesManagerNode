@@ -1,8 +1,8 @@
 <template>
   <div class="user">
     <div class="container d-flex flex-column p-3 justify-content-center align-items-center">
-    <h1>Editer Profile</h1>
-    <b-form @submit.prevent="trySubmit" class="text-left">
+    <h1 class="p-4">Edition Profil</h1>
+    <b-form @submit.prevent="trySubmit" class="text-left d-flex flex-column mx-auto col-lg-4">
       <b-form-group
               id="input-group-1"
               label="Email:"
@@ -10,10 +10,8 @@
       >
         <b-form-input
                 id="input-1"
-                value="samuel.deptula@viacesi.fr"
                 v-model="user.email"
                 type="email"
-                required
                 placeholder="Email"
         />
       </b-form-group>
@@ -24,10 +22,8 @@
       >
         <b-form-input
                 id="input-2"
-                value="Farenays"
                 v-model="user.login"
                 type="text"
-                required
                 placeholder="Pseudo"
         />
       </b-form-group>
@@ -38,14 +34,13 @@
       >
         <b-form-input
                 id="input-3"
-                value="Wypeh189"
                 v-model="newPassword"
                 type="password"
-                required
                 placeholder="Nouveau mot de passe"
         />
       </b-form-group>
-      <b-button @click="trySubmit" type="submit" :class="{'disabled': isLoading}" variant="primary">Appliquer</b-button>
+      <b-button class="col-lg-4 mx-auto mt-2" type="submit"  variant="primary">Appliquer</b-button>
+      <b-alert class="mt-5" :show="show" variant="success">{{alert}}</b-alert>
     </b-form>
     </div>
   </div>
@@ -57,7 +52,9 @@ export default {
   data () {
     return {
       user: {},
-      newPassword: ""
+      newPassword: "",
+      alert: "",
+      show: false
     }
   },
   components: {
@@ -76,6 +73,15 @@ export default {
       let response = await this.$axiosNode.get('/user/' + this.userId);
       this.user = response.data.user;
     },
+    trySubmit: async function () {
+      this.alert = "";
+      this.show = false;
+      this.user.password = this.newPassword;
+      let response = await this.$axiosNode.put('user', this.user);
+      this.alert = response.data.message;
+      this.show = true;
+      this.newPassword = "";
+    }
 }}
 </script>
 
