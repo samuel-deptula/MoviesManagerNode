@@ -29,7 +29,7 @@
                 />
             </b-form-group>
             <b-list-group v-if="errors.length">
-                <b-list-group-item v-for="error in errors" :key="error" variant="danger">{{error}}</b-list-group-item>
+                <b-list-group-item class="mb-3" v-for="error in errors" :key="error" variant="danger">{{error}}</b-list-group-item>
             </b-list-group>
             <b-button type="submit" variant="primary">Connexion</b-button>
         </b-form>
@@ -47,6 +47,9 @@
                 }
             };
         },
+        created() {
+            this.$store.commit("user/rebootErrors");
+        },
         computed: {
             errors() {
                 return this.$store.getters['user/errors'];
@@ -54,6 +57,7 @@
         },
         methods: {
             async trySubmit() {
+                this.$store.commit("user/rebootErrors");
                 this.$store.dispatch("user/trySignin", this.form);
             },
         }

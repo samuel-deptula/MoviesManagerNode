@@ -6,8 +6,8 @@ const userSchema = mongoose.Schema({
     login: { type: String, required: true },
     password: { type: String, required: true },
     movies: [Object],
-    series: [Object],
-    isAdmin: Boolean
+    isAdmin: Boolean,
+    isBanned: Boolean
 });
 
 userSchema.plugin(uniqueValidator);

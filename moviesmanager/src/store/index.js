@@ -33,7 +33,7 @@ const user = {
         context.commit("signinSuccess", response.data);
         router.push("/");
       } catch (err) {
-        context.commit("signError", err);
+        context.commit("signError", err.response.data.error);
       }
     },
     async trySignup(context, user) {
@@ -57,7 +57,10 @@ const user = {
     },
     signError(state, errors) {
       state.isLoading = false;
-      state.errors = errors;
+      state.errors.push(errors);
+    },
+    rebootErrors(state) {
+      state.errors = [];
     },
     signinSuccess(state, data) {
       state.isLoading = false;
@@ -69,6 +72,8 @@ const user = {
     signOut(state) {
       state.jwtToken = null;
       state.isLoggedIn = null;
+      state.user = {};
+      router.push('/');
     },
   }
 };

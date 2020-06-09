@@ -9,7 +9,6 @@
             >
                 <b-form-input
                         id="input-1"
-                        value="samuel.deptula@viacesi.fr"
                         v-model="form.email"
                         type="email"
                         required
@@ -23,7 +22,6 @@
             >
                 <b-form-input
                         id="input-2"
-                        value="Farenays"
                         v-model="form.login"
                         type="text"
                         required
@@ -37,7 +35,6 @@
             >
                 <b-form-input
                         id="input-3"
-                        value="Wypeh189"
                         v-model="form.password"
                         type="password"
                         required

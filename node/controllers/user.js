@@ -3,7 +3,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 exports.list = (req, res, next) => {
-  User.find()
+  User.find({isAdmin: false})
       .then(users => res.status(200).json(users))
       .catch(error => res.status(400).json({error}));
 };
@@ -15,7 +15,8 @@ exports.signup = (req, res, next) => {
                 email: req.body.email,
                 login: req.body.login,
                 password: hash,
-                isAdmin: false
+                isAdmin: false,
+                isBanned: false
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -29,6 +30,9 @@ exports.login = (req, res, next) => {
         .then(user => {
             if (!user) {
                 return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+            }
+            if (user.isBanned === true) {
+                return res.status(401).json({ error: 'Utilisateur Banni' });
             }
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
@@ -57,6 +61,17 @@ exports.find = (req, res, next) => {
             })
         })
         .catch(error => {
-            res.status((500).json({error}))
+            res.status(500).json({error})
+        })
+};
+exports.ban = (req, res, next) => {
+    User.findOne({_id: req.body.id})
+        .then(user => {
+            user.isBanned = !user.isBanned;
+            user.save();
+            res.status(200).json({message: "Changement effectué"});
+        })
+        .catch(error => {
+            res.status(500).json({error})
         })
 };

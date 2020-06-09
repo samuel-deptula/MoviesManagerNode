@@ -20,6 +20,9 @@
               <b-card-text> Synopsis: {{movie.overview}}</b-card-text>
               <b-button @click="switchFav">Favori</b-button>
               <b-card-text v-if="this.movieInfo.fav">{{this.movieInfo.fav}}</b-card-text>
+              <b-button @click="switchWatched">Vu</b-button>
+              <b-card-text v-if="this.movieInfo.watched">{{this.movieInfo.watched}}</b-card-text>
+              <b-form-rating @change="switchRate" variant="warning" v-model="movieInfo.rate"></b-form-rating>
             </b-card-body>
           </b-col>
         </b-row>
@@ -63,6 +66,15 @@ export default {
     switchFav: async function() {
       this.movieInfo.fav = !this.movieInfo.fav;
       let response = await this.$axiosNode.post('/movie/fav', {movieId: this.$route.params.id, userId: this.userId, fav: this.movieInfo.fav});
+      this.movieInfo = response.data.movie;
+    },
+    switchWatched: async function() {
+      this.movieInfo.watched = !this.movieInfo.watched;
+      let response = await this.$axiosNode.post('/movie/watched', {movieId: this.$route.params.id, userId: this.userId, watched: this.movieInfo.watched});
+      this.movieInfo = response.data.movie;
+    },
+    switchRate: async function() {
+      let response = await this.$axiosNode.post('/movie/rate', {movieId: this.$route.params.id, userId: this.userId, rate: this.movieInfo.rate});
       this.movieInfo = response.data.movie;
     },
     fetchMovie: async function () {

@@ -6,12 +6,12 @@
                 <movie-item :isMovie="true" :movie="movie"/>
             </b-list-group-item>
         </b-list-group>
-        <h1 v-if="series.length > 0">Séries populaires de la semaine</h1>
-        <b-list-group horizontal="" id="seriesList" class="listGroup">
-            <b-list-group-item class="movieItem" v-for="serie in series" :key="serie.id">
-                <movie-item :isMovie="false" :movie="serie"/>
-            </b-list-group-item>
-        </b-list-group>
+<!--        <h1 v-if="series.length > 0">Séries populaires de la semaine</h1>-->
+<!--        <b-list-group horizontal="" id="seriesList" class="listGroup">-->
+<!--            <b-list-group-item class="movieItem" v-for="serie in series" :key="serie.id">-->
+<!--                <movie-item :isMovie="false" :movie="serie"/>-->
+<!--            </b-list-group-item>-->
+<!--        </b-list-group>-->
     </div>
 </template>
 

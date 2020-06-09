@@ -1,30 +1,69 @@
 <template>
   <div class="user">
-    <h1>Bonjour {{user.login}}</h1>
-    <b-list-group v-if="favs.length > 0" horizontal="" id="moviesList" class="listGroup">
-      <b-list-group-item class="movieItem" v-for="movie in favs" :key="movie.id">
-        <movie-item :isMovie="true" :movie="movie"/>
-      </b-list-group-item>
-    </b-list-group>
+    <div class="container d-flex flex-column p-3 justify-content-center align-items-center">
+    <h1>Editer Profile</h1>
+    <b-form @submit.prevent="trySubmit" class="text-left">
+      <b-form-group
+              id="input-group-1"
+              label="Email:"
+              label-for="input-1"
+      >
+        <b-form-input
+                id="input-1"
+                value="samuel.deptula@viacesi.fr"
+                v-model="user.email"
+                type="email"
+                required
+                placeholder="Email"
+        />
+      </b-form-group>
+      <b-form-group
+              id="input-group-2"
+              label="Pseudo:"
+              label-for="input-2"
+      >
+        <b-form-input
+                id="input-2"
+                value="Farenays"
+                v-model="user.login"
+                type="text"
+                required
+                placeholder="Pseudo"
+        />
+      </b-form-group>
+      <b-form-group
+              id="input-group-3"
+              label="Nouveau mot de passe:"
+              label-for="input-3"
+      >
+        <b-form-input
+                id="input-3"
+                value="Wypeh189"
+                v-model="newPassword"
+                type="password"
+                required
+                placeholder="Nouveau mot de passe"
+        />
+      </b-form-group>
+      <b-button @click="trySubmit" type="submit" :class="{'disabled': isLoading}" variant="primary">Appliquer</b-button>
+    </b-form>
+    </div>
   </div>
 </template>
 
 <script>
-  import MovieItem from "../components/MovieItem";
 export default {
   name: 'profile',
   data () {
     return {
       user: {},
-      favs: [],
+      newPassword: ""
     }
   },
   components: {
-    MovieItem
   },
   created() {
     this.getUser();
-    this.getFavs();
   },
   computed: {
     userId() {
@@ -37,31 +76,8 @@ export default {
       let response = await this.$axiosNode.get('/user/' + this.userId);
       this.user = response.data.user;
     },
-    getFavs: async function() {
-      let promises = [];
-        let response = await this.$axiosNode.get(
-                "/movie/fav/list/" + this.userId);
-        let favs = response.data.favs;
-        favs.forEach((fav) => {
-          promises.push(this.$axios.get('/movie/' + fav.id));
-        });
-      Promise.all(promises).then( (results) => {
-        results.forEach( (response) => {
-          this.favs.push(response.data);
-        });
-    })
-  }
 }}
 </script>
 
 <style lang="css">
-  .listGroup {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    justify-content: center;
-  }
-  .movieItem {
-    width: 20%;
-  }
 </style>
