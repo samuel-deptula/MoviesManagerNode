@@ -33,7 +33,7 @@
                     </b-dropdown-item>
                 </b-nav-item-dropdown>
                 <b-nav-item v-if="isAdmin"><router-link class="mr-3" to="/admin">Admin</router-link></b-nav-item>
-                <b-nav-item><router-link class="mr-3" to="/contact">Contactez nous</router-link></b-nav-item>
+                <b-nav-item v-if="!isAdmin"><router-link class="mr-3" to="/contact">Contactez nous</router-link></b-nav-item>
                 <b-button variant="danger" @click="logout">Déconnexion</b-button>
             </b-navbar-nav>
             <b-navbar-nav v-else class="ml-auto">

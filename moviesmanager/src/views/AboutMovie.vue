@@ -11,7 +11,7 @@
               <b-card-text>
                 <h1>{{movie.title}} <span v-if="movie.release_date">({{year(movie.release_date)}})</span></h1>
               </b-card-text>
-              <div class="d-flex flex-row mx-auto">
+              <div class="d-flex flex-row flex-wrap mx-auto m-3">
                 <b-card-text class="item mr-1">
                   {{date(movie.release_date)}}
                 </b-card-text>
@@ -20,11 +20,17 @@
                     <b-card-text v-for="(genre, index) in movie.genres" class="mr-1" :key="genre.id">{{genre.name}}{{index === movie.genres.length - 1 ? "" : ","}}</b-card-text>
                   </b-list-group>
                 </b-card-text>
+                <b-card-text>
+                  {{hour(movie.runtime)}}
+                </b-card-text>
               </div>
-              <b-card-text> Synopsis: {{movie.overview}}</b-card-text>
-              <i @click="switchFav" style="color: var(--danger); cursor: pointer;" class="fa-2x" :class="movieInfo.fav ? 'fas fa-heart' : 'far fa-heart'"></i>
-              <i @click="switchWatched" style="cursor: pointer;" class="fa-2x" :class="movieInfo.watched ? 'fas fa-eye blue' : 'far fa-eye-slash orange'"></i>
-              <b-form-rating @change="switchRate" variant="warning" v-model="movieInfo.rate"></b-form-rating>
+              <div class="d-flex flex-row mx-auto m-3">
+                <i @click="switchFav" style="color: var(--danger); cursor: pointer;" class="fa-2x mr-5" :class="movieInfo.fav ? 'fas fa-heart' : 'far fa-heart'"></i>
+                <i @click="switchWatched" style="cursor: pointer;" class="fa-2x" :class="movieInfo.watched ? 'fas fa-eye blue' : 'far fa-eye-slash orange'"></i>
+              </div>
+              <b-card-text><h3 class="col-md-2 mt-2">Synopsis</h3></b-card-text>
+              <b-card-text class="col-md-8 mb-3"> {{movie.overview}}</b-card-text>
+              <b-form-rating class="col-md-8 mx-auto mt-5" @change="switchRate" variant="warning" v-model="movieInfo.rate"></b-form-rating>
             </b-card-body>
           </b-col>
         </b-row>
@@ -71,7 +77,7 @@ export default {
     userId() {
       let user = this.$store.getters['user/user'];
       return user.id;
-    }
+    },
   },
   created() {
     this.fetchMovie();
@@ -86,6 +92,12 @@ export default {
   methods: {
     scrollTop() {
       window.scrollTo(0,0);
+    },
+    hour(time) {
+      let quotient = Math.floor(time/60);
+      let remainder = time % 60;
+
+      return (quotient + "h " + remainder + "m")
     },
     date(dateString) {
       if(dateString !== ""){
